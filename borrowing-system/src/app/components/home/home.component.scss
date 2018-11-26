@@ -1,0 +1,53 @@
+#grid-body-container {
+    display: grid;
+    grid-template: auto auto auto / 50% 50%;
+    grid-template-areas: "main_label ." "available_products rent_products" "available_products rent_product_form";
+    margin: 26px 73px 73px 61px;
+    grid-gap: 25px 43px;
+}
+
+.main-label {
+    grid-area: main_label;
+    // grid-area: 1 / 1 / 2 / 2;
+    justify-self: start;
+}
+
+#available-products-container {
+    grid-area: available_products;
+    // grid-area: 2 / 1 / auto / 1;
+    height: fit-content;
+}
+
+#rent-products-container {
+    grid-area: rent_products;
+    // grid-area: 2 / 2 / 2 / 2;
+}
+
+#rent-product-form-container {
+    grid-area: rent_product_form;
+    // grid-area: 3 / 2 / 3 / 2;
+}
+
+.btn-dark {
+    background-color: #212529;
+}
+
+.btn-dark:hover {
+    box-shadow: 0px 6px 6px #888888;
+}
+
+h5 {
+    margin-bottom: 29px;
+}
+
+.card-box-shadow {
+    box-shadow: 0px 3px 6px #D6D6D6;
+}
+
+th {
+    font-weight: 400;
+}
+
+input {
+    color: black;
+}

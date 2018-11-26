@@ -1,14 +1,12 @@
-$menu-size: 400px;
+$menu-size: 350px;
 $font: 'Montserrat';
 #mainContainer {
     display: grid;
     width: 100%;
     height: 100% !important;
-    grid-template-columns: $menu-size auto;
+    grid-template-columns: $menu-size 0px auto;
     grid-template-rows: auto;
-    grid-gap: 10px;
     text-align: left;
-    grid-template: "sidebar page-content";
 }
 
 #page-content {
@@ -17,7 +15,7 @@ $font: 'Montserrat';
 }
 
 #sidebar {
-    grid-area: sidebar;
+    grid-column: 1 / 1;
     background-color: black;
     color: white;
     display: flex;

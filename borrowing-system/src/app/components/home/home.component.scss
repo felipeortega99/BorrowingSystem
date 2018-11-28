@@ -1,31 +1,30 @@
 #grid-body-container {
     display: grid;
-    grid-template: auto auto auto / 50% 50%;
+    // grid-template: auto auto auto / 50% 50%;
+    width: 100%;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto;
     grid-template-areas: "main_label ." "available_products rent_products" "available_products rent_product_form";
-    margin: 26px 73px 73px 61px;
+    margin: auto;
     grid-gap: 25px 43px;
 }
 
 .main-label {
     grid-area: main_label;
-    // grid-area: 1 / 1 / 2 / 2;
     justify-self: start;
 }
 
 #available-products-container {
-    grid-area: available_products;
-    // grid-area: 2 / 1 / auto / 1;
+    grid-area: available_products; 
     height: fit-content;
 }
 
 #rent-products-container {
     grid-area: rent_products;
-    // grid-area: 2 / 2 / 2 / 2;
 }
 
 #rent-product-form-container {
     grid-area: rent_product_form;
-    // grid-area: 3 / 2 / 3 / 2;
 }
 
 .btn-dark {

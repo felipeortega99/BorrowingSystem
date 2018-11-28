@@ -1,27 +1,22 @@
 <!-- Sidebar -->
 <div id="mainContainer">
-    <div id="sidebar">
-        <h2 id="title">
-            SISTEMA DE <br /> PRÉSTAMOS
-        </h2>
-        <div class="btn-group-vertical" role="group">
-            <button type="button" class="sidebar-item">
-          <h3 class="active">Inicio</h3>
-        </button>
-            <button type="button" class="sidebar-item">
-          <h3>Agregar producto</h3>
-        </button>
-            <button type="button" class="sidebar-item"><h3>Multas</h3></button>
-        </div>
-        <!--
-      <ul class="sidebar-nav">
-        <h1>SISTEMA DE PRÉSTAMOS</h1>
-        <li><a href="#">Inicio</a></li>
-        <li><a href="#">Agregar producto</a></li>
-        <li><a href="#">Overview</a></li>
-      </ul>
-    -->
+  <div id="sidebar">
+    <h2 id="title">
+      SISTEMA DE <br />
+      PRÉSTAMOS
+    </h2>
+    <div class="btn-group-vertical" role="group">
+      <button type="button" class="sidebar-item">
+        <h3 class="active">Inicio</h3>
+      </button>
+      <button type="button" class="sidebar-item">
+        <h3>Agregar producto</h3>
+      </button>
+      <button type="button" class="sidebar-item"><h3>Multas</h3></button>
     </div>
-    <!-- Sidebar end -->
-    <router-outlet></router-outlet>
+  </div>
+  <div id="page-content">
+      <router-outlet></router-outlet>
+  </div>
+  <!-- Sidebar end -->
 </div>

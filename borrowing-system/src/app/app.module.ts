@@ -1,18 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+// Routes
 import { AppRoutingModule } from './app-routing.module';
+
+// Components
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { AddProductComponent } from './add-product/add-product.component';
-import { FinesComponent } from './fines/fines.component';
+import { HomeComponent,
+  FinesComponent,
+  LoginComponent,
+  AddProductComponent
+} from './components/index.components';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AddProductComponent,
-    FinesComponent
+    FinesComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,58 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600');
+$font: 'Montserrat', sans-serif;
+$light: 300;
+$regular: 400;
+$medium: 500;
+$semi-bold:600;
+
+body {
+    background-color: #F5F5F5;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: $regular;
+    color: black;
+}
+
+.font-weight-light {
+    font-weight: $light;
+}
+
+.font-weight-medium {
+    font-weight: $medium;
+}
+
+.font-weight-regular {
+    font-weight: $regular;
+}
+
+html,
+body {
+    height: 100%
+}
+
+h1 {
+    font-family: $font;
+    font-weight: $semi-bold;
+}
+
+h2 {
+    font-family: $font;
+    font-weight: $regular;
+    font-size: 40px;
+    text-transform: uppercase;
+}
+
+h3 {
+    font-family: $font;
+    font-weight: $light;
+}
+
+h4 {
+    font-family: $font;
+    font-weight: $semi-bold;
+}
+
+.btn-dark{
+    background-color: black;
+}

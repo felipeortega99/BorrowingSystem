@@ -1,0 +1,26 @@
+<div id="grid-body-container" *ngIf="isLogged">
+  <h1 class="main-label">Multas</h1>
+  <div class="card card-box-shadow" id="available-products-container">
+    <div class="card-body">
+      <h5 class="card-title text-left">Productos disponibles</h5>
+      <table class="table table-bordered table-sm">
+        <thead class="thead-dark font-weight-regular">
+          <tr>
+            <th scope="col">Rentador</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Costo</th>
+            <th scope="col">Tipo</th>
+          </tr>
+        </thead>
+        <tbody class="font-weight-light" *ngFor="let fine of fines">
+          <tr>
+            <td scope="row">{{ fine.borrower }}</td>
+            <td>{{ fine.product }}</td>
+            <td>$ {{ fine.cost }}</td>
+            <td>{{ fine.type }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+.loginContainer {
+    width: 600px;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    margin: auto;
+}
+
+#title {
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 100px;
+    padding-bottom: 30px;
+}
+
+#subtitle {
+    margin-right: auto;
+    margin-left: auto;
+    padding-bottom: 10px;
+    font-size: 40px;
+}
+
+.card-box-shadow {
+    box-shadow: 0px 3px 6px #D6D6D6;
+}
+
+form-group > input {
+    color: black;
+}

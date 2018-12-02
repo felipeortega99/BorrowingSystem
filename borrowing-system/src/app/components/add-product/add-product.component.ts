@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-product',
@@ -6,10 +7,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-product.component.scss']
 })
 export class AddProductComponent implements OnInit {
+addProductForm: FormGroup;
+submitted = false;
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) {
+    this.createForm();
+  }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  createForm() {
+    this.addProductForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      price: ['', Validators.required]
+    });
+  }
+
+  get f() { return this.addProductForm.controls; }
+
+  onSubmit() {
+    this.submitted = true;
+    if (this.addProductForm.invalid) {
+      return;
+    }
   }
 
 }

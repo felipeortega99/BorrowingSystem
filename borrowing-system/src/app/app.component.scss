@@ -1,7 +1,7 @@
 $menu-size: 350px;
 $font: 'Montserrat';
 
-#mainContainer {
+.mainContainer {
     display: grid;
     width: 100%;
     height: 100% !important;
@@ -43,8 +43,16 @@ $font: 'Montserrat';
     border: 0px;
 }
 
+.sidebar-item:hover{
+    background-color: rgb(56, 56, 56);
+}
+
 .active {
     font-weight: bold;
+}
+
+a:hover{
+    cursor: pointer;
 }
 
 #title {

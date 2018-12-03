@@ -6,8 +6,8 @@
     grid-template-rows: auto auto auto;
     grid-template-areas: 
     "main_label ." 
-    "available_products rent_product_form" 
-    "available_products .";
+    "rent_product_form available_products" 
+    ". available_products";
     margin: auto;
     grid-gap: 25px 43px;
 }
@@ -48,4 +48,8 @@ th {
 
 input {
     color: black;
+}
+
+td:first-letter{
+    text-transform: capitalize;
 }

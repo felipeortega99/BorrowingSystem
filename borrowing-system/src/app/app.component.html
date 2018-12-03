@@ -1,21 +1,25 @@
-<div id="mainContainer">
-    <div id="sidebar">
+<div [ngClass]="{ mainContainer: isLogged }">
+    <div id="sidebar" *ngIf="isLogged">
         <h2 id="title">
             SISTEMA DE <br /> PRÉSTAMOS
         </h2>
         <div class="btn-group-vertical" role="group">
-            <button type="button" class="sidebar-item">
-        <h3 class="active">Inicio</h3>
-      </button>
-            <button type="button" class="sidebar-item">
-        <h3>Agregar producto</h3>
-      </button>
-            <button type="button" class="sidebar-item"><h3>Multas</h3></button>
+            <a (click)="goToHome()" class="sidebar-item">
+                <h3 [ngClass]="{ active: home }">Inicio</h3>
+            </a>
+            <a (click)="goToAddProduct()" class="sidebar-item">
+                <h3 [ngClass]="{ active: addProduct }">Agregar producto</h3>
+            </a>
+            <a (click)="goToFines()" class="sidebar-item">
+                <h3 [ngClass]="{ active: fines }">Multas</h3>
+            </a>
+            <a id="logout" (click)="logout()" class="sidebar-item">
+                <h3>Cerrar sesión</h3>
+            </a>
         </div>
     </div>
     <div id="page-content">
-        <app-add-product></app-add-product>
-        <!-- <router-outlet></router-outlet> -->
+        <router-outlet></router-outlet>
     </div>
 </div>
 

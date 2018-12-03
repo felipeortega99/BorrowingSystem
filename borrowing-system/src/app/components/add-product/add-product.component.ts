@@ -120,7 +120,7 @@ export class AddProductComponent implements OnInit {
         .object(`products/${ref.key}`)
         .set(this.product)
         .then(() => {
-          this.successMessage("La producto se agregó con éxito");
+          this.successMessage("El producto se agregó con éxito");
           this.submittedP = false;
           this.clearProductForm();
         })

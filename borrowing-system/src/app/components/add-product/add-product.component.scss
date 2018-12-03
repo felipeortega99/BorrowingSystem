@@ -3,7 +3,10 @@
     width: 100%;
     grid-template-columns: auto auto;
     grid-template-rows: auto auto;
-    grid-template-areas: "main_label ." "add_product all_products";
+    grid-template-areas: 
+    "main_label ." 
+    "add_product all_products"
+    "add_category all_products";
     margin: auto;
     grid-gap: 25px 43px;
 }
@@ -15,6 +18,11 @@
 
 #add-product-container {
     grid-area: add_product;
+    height: fit-content;
+}
+
+#add-category-container {
+    grid-area: add_category;
     height: fit-content;
 }
 

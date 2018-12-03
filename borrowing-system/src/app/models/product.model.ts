@@ -1,5 +1,7 @@
 export class ProductModel {
+  k: string;
   name: string;
   cost: number;
-  condition: string;
+  available: boolean;
+  category: string;
 }

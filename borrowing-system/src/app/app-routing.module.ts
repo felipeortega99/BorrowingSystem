@@ -4,7 +4,8 @@ import {
   HomeComponent,
   FinesComponent,
   LoginComponent,
-  AddProductComponent
+  AddProductComponent,
+  RentProductsComponent
 } from "./components/index.components";
 
 const ROUTES: Routes = [
@@ -12,7 +13,8 @@ const ROUTES: Routes = [
   { path: "fines", component: FinesComponent },
   { path: "login", component: LoginComponent },
   { path: "add-product", component: AddProductComponent },
-  { path: "", redirectTo: "login", pathMatch: "full" },
+  { path: "rent-products", component: RentProductsComponent },
+  { path: "", redirectTo: "login", pathMatch: "full" }
 ];
 
 @NgModule({

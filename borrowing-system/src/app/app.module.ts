@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 // Angular Fire
 import { AngularFireModule } from '@angular/fire';
@@ -17,7 +18,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent,
   FinesComponent,
   LoginComponent,
-  AddProductComponent
+  AddProductComponent,
+  RentProductsComponent
 } from './components/index.components';
 
 import { AuthService } from "./services/auth.service";
@@ -28,7 +30,8 @@ import { AuthService } from "./services/auth.service";
     HomeComponent,
     AddProductComponent,
     FinesComponent,
-    LoginComponent
+    LoginComponent,
+    RentProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { AuthService } from "./services/auth.service";
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
-    AngularFireStorageModule // imports firebase/storage only needed for storage features
+    AngularFireStorageModule, // imports firebase/storage only needed for storage features
+    NgxSpinnerModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

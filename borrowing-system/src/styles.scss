@@ -75,3 +75,18 @@ h4 {
 .input-invalid-feedback-inactive {
     margin-bottom: 1rem;
 }
+
+i {
+    font-family: 'Material Icons';
+    font-size: 24px;
+    color: #A41B25;
+}
+
+i:hover {
+    cursor: pointer;
+    text-shadow: 0px 6px 6px #888888;
+}
+
+th {
+    background-color: black !important;
+}

@@ -1,6 +1,5 @@
 $menu-size: 300px;
 $font: 'Montserrat';
-
 .mainContainer {
     display: grid;
     width: 100%;
@@ -31,8 +30,8 @@ $font: 'Montserrat';
     align-content: space-between;
 }
 
-#logout:hover{
-    background-color: crimson;
+#logout:hover {
+    background-color: #A41B25;
 }
 
 .sidebar-item {
@@ -49,7 +48,7 @@ $font: 'Montserrat';
     border-bottom: 1px solid;
 }
 
-.sidebar-item:hover{
+.sidebar-item:hover {
     background-color: rgb(56, 56, 56);
 }
 
@@ -57,7 +56,7 @@ $font: 'Montserrat';
     font-weight: bold;
 }
 
-a:hover{
+a:hover {
     cursor: pointer;
 }
 

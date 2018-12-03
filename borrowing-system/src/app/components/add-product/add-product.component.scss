@@ -20,4 +20,9 @@
 
 #all-products-container {
     grid-area: all_products;
+    height: fit-content;
+}
+
+td:last-child {
+    text-align: center;
 }

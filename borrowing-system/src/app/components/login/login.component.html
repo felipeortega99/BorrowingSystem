@@ -1,32 +1,18 @@
 <div class="loginContainer">
-  <h2 id="title">
-    SISTEMA DE <br />
-    PRÉSTAMOS
-  </h2>
-  <h4 id="subtitle">Bienvenido</h4>
-  <div class="card card-box-shadow" id="rent-product-form-container">
-    <div class="card-body">
-      <form class="font-weight-light">
-        <form>
-          <div class="form-group">
-            <input
-              type="username"
-              class="form-control"
-              id="username"
-              placeholder="Usuario"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              placeholder="Contraseña"
-            />
-          </div>
-        </form>
-        <button type="submit" class="btn btn-dark btn-block">INGRESAR</button>
-      </form>
+    <h2 id="title">
+        SISTEMA DE <br /> PRÉSTAMOS
+    </h2>
+    <h4 id="subtitle">Bienvenido</h4>
+    <div class="card card-box-shadow" id="rent-product-form-container">
+        <div class="card-body">
+            <form (submit)="login()" class="font-weight-light">
+                <div class="form-group">
+                    <input type="email" name="email" class="form-control" id="email" placeholder="Correo electrónico" [(ngModel)]="user.email" />
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" class="form-control" id="password" placeholder="Contraseña" [(ngModel)]="user.password" />
+                </div>
+                <input type="submit" class="btn btn-dark btn-block" value="INGRESAR" />
+            </form>
+        </div>
     </div>
-  </div>
-</div>

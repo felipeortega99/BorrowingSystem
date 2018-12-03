@@ -1,124 +1,76 @@
-<div id="grid-body-container">
-    <h1 class="main-label">Inicio</h1>
-    <div class="card card-box-shadow" id="available-products-container">
-        <div class="card-body">
-            <h5 class="card-title text-left">Productos disponibles</h5>
+<div id="grid-body-container" *ngIf="isLogged">
+  <h1 class="main-label">Inicio</h1>
+  <div class="card card-box-shadow" id="available-products-container">
+    <div class="card-body">
+      <h5 class="card-title text-left">Productos disponibles</h5>
 
-            <table class="table table-bordered table-sm">
-                <thead class="thead-dark font-weight-regular">
-                    <tr>
-                        <th scope="col">Producto</th>
-                        <th scope="col">Categoria</th>
-                    </tr>
-                </thead>
-                <tbody class="font-weight-light">
-                    <tr>
-                        <td scope="row">Cable HDMI</td>
-                        <td>Cables</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Cable HDMI</td>
-                        <td>Cables</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Cable HDMI</td>
-                        <td>Cables</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Cable HDMI</td>
-                        <td>Cables</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Cable HDMI</td>
-                        <td>Cables</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Cable HDMI</td>
-                        <td>Cables</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Cable HDMI</td>
-                        <td>Cables</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Cable HDMI</td>
-                        <td>Cables</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Cable HDMI</td>
-                        <td>Cables</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Cable HDMI</td>
-                        <td>Cables</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+      <table class="table table-bordered table-hover table-sm">
+        <thead class="thead-dark font-weight-regular">
+          <tr>
+            <th scope="col">Producto</th>
+            <th scope="col">Categoria</th>
+          </tr>
+        </thead>
+        <tbody class="font-weight-light">
+          <tr *ngFor="let product of products">
+            <td scope="row">{{ product.name }}</td>
+            <td>{{ product.category }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="card card-box-shadow" id="rent-products-container">
-        <div class="card-body">
-            <h5 class="card-title text-left">En renta</h5>
-
-            <table class="table table-bordered table-hover table-sm">
-                <thead class="thead-dark font-weight-regular">
-                    <tr>
-                        <th scope="col">Producto</th>
-                        <th scope="col">Rentador</th>
-                        <th scope="col">Matrícula</th>
-                    </tr>
-                </thead>
-                <tbody class="font-weight-light">
-                    <tr>
-                        <td scope="row">Cable HDMI</td>
-                        <td>Mariana Cázares</td>
-                        <td>9459</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Cable HDMI</td>
-                        <td>Mariana Cázares</td>
-                        <td>9459</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Cable HDMI</td>
-                        <td>Mariana Cázares</td>
-                        <td>9459</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Cable HDMI</td>
-                        <td>Mariana Cázares</td>
-                        <td>9459</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Cable HDMI</td>
-                        <td>Mariana Cázares</td>
-                        <td>9459</td>
-                    </tr>
-                </tbody>
-            </table>
+  </div>
+  <div class="card card-box-shadow" id="rent-product-form-container">
+    <div class="card-body">
+      <h5 class="card-title text-left">Rentar producto</h5>
+      <form
+        [formGroup]="rentProductForm"
+        (ngSubmit)="onSubmit()"
+        class="font-weight-light"
+      >
+        <div class="form-group">
+          <select class="form-control" id="productos" required>
+            <option>Seleccionar producto</option>
+            <option *ngFor="let product of products">{{ product.name }}</option>
+          </select>
         </div>
-    </div>
-    <div class="card card-box-shadow" id="rent-product-form-container">
-        <div class="card-body">
-            <h5 class="card-title text-left">Rentar producto</h5>
-            <form class="font-weight-light">
-                <div class="form-group">
-                    <select class="form-control" id="productos" required>
-                      <option >Seleccionar producto</option>
-                      <option >1</option>
-                      <option >1</option>
-                      <option >1</option>
-                      <option >1</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="name" required placeholder="Nombre del rentador">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="matricula" required placeholder="Matrícula del rentador">
-                </div>
-                <button type="submit" class="btn btn-dark btn-block">Rentar</button>
-            </form>
+        <div class="form-group">
+          <input
+            type="text"
+            formControlName="name"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+            required
+            placeholder="Nombre del rentador"
+          />
         </div>
+        <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+          <div *ngIf="f['name'].errors.required">
+            Por favor ingresa un nombre
+          </div>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="studentNumber"
+            [ngClass]="{ 'is-invalid': submitted && f.studentNumber.errors }"
+            required
+            placeholder="Matrícula del rentador"
+          />
+        </div>
+        <div
+          *ngIf="submitted && f['studentNumber'].errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="f['studentNumber'].errors.required">
+            Por favor ingresa una matricula
+          </div>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-dark btn-block">RENTAR</button>
+        </div>
+      </form>
     </div>
+  </div>
 </div>

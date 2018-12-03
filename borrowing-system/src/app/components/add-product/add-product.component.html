@@ -1,3 +1,58 @@
-<p>
-  add-product works!
-</p>
+<div id="grid-body-container" *ngIf="isLogged">
+    <h1 class="main-label">Agregar producto</h1>
+    <div class="card card-box-shadow" id="add-product-container">
+        <div class="card-body">
+            <h5 class="card-title text-left">Nuevo producto</h5>
+            <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()" class="font-weight-light" novalidate>
+                <div class="form-group">
+                    <input type="text" formControlName="name" class="form-control" placeholder="Nombre" [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" required>
+                </div>
+                <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                    <div *ngIf="f['name'].errors.required">Por favor ingresa un nombre</div>
+                </div>
+                <div class="form-group">
+                    <input type="number" formControlName="cost" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.cost.errors }" maxlength="15" placeholder="Costo" required>
+                </div>
+                <div *ngIf="submitted && f['cost'].errors" class="invalid-feedback">
+                    <div *ngIf="f['cost'].errors.required">Por favor ingresa el costo</div>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" formControlName="category" id="category" [ngClass]="{ 'is-invalid': submitted && f.category.errors }">
+                    <option value="">Categoria</option>
+                    <option value="Cables">Cables</option>
+                    <option value="Artículos de oficina">Artículos de oficina</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-dark btn-block">AGREGAR</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card card-box-shadow" id="all-products-container">
+        <div class="card-body">
+            <h5 class="card-title text-left">Productos</h5>
+
+            <table class="table table-bordered table-hover table-sm">
+                <thead class="thead-dark font-weight-regular">
+                    <tr>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody class="font-weight-light">
+                    <tr *ngFor="let product of products">
+                        <td scope="row">{{product.name}}</td>
+                        <td>${{product.cost}}</td>
+                        <td>{{product.category}}</td>
+                        <td><i (click)="onDeleteProduct(product.k)" class="material-icons">delete</i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

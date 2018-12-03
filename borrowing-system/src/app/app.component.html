@@ -1,25 +1,26 @@
 <div [ngClass]="{ mainContainer: isLogged }">
-  <div id="sidebar" *ngIf="isLogged">
-    <h2 id="title">
-      SISTEMA DE <br />
-      PRÉSTAMOS
-    </h2>
-    <div class="btn-group-vertical" role="group">
-      <a (click)="goToHome()" class="sidebar-item">
-        <h3 [ngClass]="{ active: home }">Inicio</h3>
-      </a>
-      <a (click)="goToAddProduct()" class="sidebar-item">
-        <h3 [ngClass]="{ active: addProduct }">Agregar producto</h3>
-      </a>
-      <a (click)="goToFines()" class="sidebar-item"
-        ><h3 [ngClass]="{ active: fines }">Multas</h3></a
-      >
-      <a id="logout" (click)="logout()" class="sidebar-item"
-        ><h3>Cerrar sesión</h3></a
-      >
+    <div id="sidebar" *ngIf="isLogged">
+        <h2 id="title">
+            SISTEMA DE <br /> PRÉSTAMOS
+        </h2>
+        <div class="btn-group-vertical" role="group">
+            <a (click)="goToHome()" class="sidebar-item">
+                <h3 [ngClass]="{ active: home }">Inicio</h3>
+            </a>
+            <a (click)="goToAddProduct()" class="sidebar-item">
+                <h3 [ngClass]="{ active: addProduct }">Agregar producto</h3>
+            </a>
+            <a (click)="goToFines()" class="sidebar-item">
+                <h3 [ngClass]="{ active: fines }">Multas</h3>
+            </a>
+            <a id="logout" (click)="logout()" class="sidebar-item">
+                <h3>Cerrar sesión</h3>
+            </a>
+        </div>
     </div>
-  </div>
-  <div id="page-content"><router-outlet></router-outlet></div>
+    <div id="page-content">
+        <router-outlet></router-outlet>
+    </div>
 </div>
 
 <!-- <app-login></app-login> -->

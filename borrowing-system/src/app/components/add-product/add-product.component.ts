@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/auth";
@@ -9,14 +10,15 @@ import { AngularFireAuth } from "@angular/fire/auth";
   styleUrls: ["./add-product.component.scss"]
 })
 export class AddProductComponent implements OnInit {
-  
-  isLogged: boolean = false;
-  
-  constructor(
+addProductForm: FormGroup;
+submitted = false;
+isLogged = false;
+
+  constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private afAuth: AngularFireAuth
-  ) {
+    private afAuth: AngularFireAuth) {
+    this.createForm();
     this.afAuth.authState.subscribe(auth => {
       if (auth) {
         this.isLogged = true;
@@ -30,4 +32,20 @@ export class AddProductComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  createForm() {
+    this.addProductForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      price: ['', Validators.required]
+    });
+  }
+
+  get f() { return this.addProductForm.controls; }
+
+  onSubmit() {
+    this.submitted = true;
+    if (this.addProductForm.invalid) {
+      return;
+    }
+  }
 }

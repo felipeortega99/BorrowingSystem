@@ -1,12 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600');
-$font: 'Montserrat', sans-serif;
+$font: 'Montserrat',
+sans-serif;
 $light: 300;
 $regular: 400;
 $medium: 500;
 $semi-bold:600;
-
 body {
     background-color: #F5F5F5;
     font-family: 'Montserrat', sans-serif;
@@ -53,6 +53,23 @@ h4 {
     font-weight: $semi-bold;
 }
 
-.btn-dark{
+.btn-dark {
     background-color: black;
+}
+
+.btn-dark:hover {
+    box-shadow: 0px 6px 6px #888888;
+}
+
+.invalid-feedback {
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.input-invalid-feedback-active {
+    margin-bottom: 0;
+}
+
+.input-invalid-feedback-inactive {
+    margin-bottom: 1rem;
 }

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 
-//Angular Fire
+// Angular Fire
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { auth } from "firebase/app";
@@ -18,7 +18,7 @@ export class AuthService {
 
   constructor(private afAuth: AngularFireAuth) {
     afAuth.authState.subscribe((user: User) => {
-      console.log("Email: "+this.email);
+      console.log("Email: " + this.email);
       this.user = user;
     });
   }

@@ -10,7 +10,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
   styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
-  private user = {} as UserModel;
+  public user = {} as UserModel;
 
   constructor(
     private authService: AuthService,

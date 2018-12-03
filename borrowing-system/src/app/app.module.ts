@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-//Angular Fire
+// Angular Fire
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireStorageModule } from '@angular/fire/storage';
@@ -18,7 +19,7 @@ import { HomeComponent,
   LoginComponent,
   AddProductComponent
 } from './components/index.components';
-import { FormsModule } from "@angular/forms";
+
 import { AuthService } from "./services/auth.service";
 
 @NgModule({
@@ -32,6 +33,7 @@ import { AuthService } from "./services/auth.service";
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule, // imports firebase/firestore, only needed for database features

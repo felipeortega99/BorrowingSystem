@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/auth";
@@ -11,16 +12,18 @@ import { LoanModel } from "../../models/loan.model";
   styleUrls: ["./home.component.scss"]
 })
 export class HomeComponent implements OnInit {
-  isLogged: boolean = false;
+  rentProductForm: FormGroup;
+  submitted = false;
+  isLogged = false;
   products: any;
   private loan = {} as LoanModel;
 
-  constructor(
+  constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
     private afAuth: AngularFireAuth,
-    private afDb: AngularFireDatabase
-  ) {
+    private afDb: AngularFireDatabase ) {
+    this.createForm();
     this.afAuth.authState.subscribe(auth => {
       if (auth) {
         this.isLogged = true;
@@ -40,4 +43,19 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {}
-}
+
+  createForm() {
+    this.rentProductForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      studentNumber: ['', Validators.required]
+    });
+  }
+  get f() { return this.rentProductForm.controls; }
+
+  onSubmit() {
+    this.submitted = true;
+    if (this.rentProductForm.invalid) {
+      return;
+    }
+  }
+  }

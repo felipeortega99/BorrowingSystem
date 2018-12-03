@@ -39,13 +39,15 @@ h1 {
 h2 {
     font-family: $font;
     font-weight: $regular;
-    font-size: 40px;
+    font-size: 30px;
     text-transform: uppercase;
 }
 
 h3 {
     font-family: $font;
     font-weight: $light;
+    font-size: 1.2rem;
+    margin: 0px;
 }
 
 h4 {

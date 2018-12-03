@@ -12,10 +12,11 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class AppComponent {
   title = "borrowing-system";
-  isLogged: boolean = false;
-  home: boolean = false;
-  addProduct: boolean = false;
-  fines: boolean = false;
+  isLogged = false;
+  home = false;
+  addProduct = false;
+  fines = false;
+  rentProducts = false;
 
   constructor(
     private authService: AuthService,
@@ -41,6 +42,7 @@ export class AppComponent {
     this.home = false;
     this.addProduct = false;
     this.fines = false;
+    this.rentProducts = false;
     this.authService.logout();
     this.router.navigate(["/login"]);
   }
@@ -54,7 +56,10 @@ export class AppComponent {
     this.changeActiveButton("add-product");
     this.router.navigate(["/add-product"]);
   }
-
+  goToRentProducts() {
+    this.changeActiveButton("rent-products");
+    this.router.navigate(["/rent-products"]);
+  }
   goToFines() {
     this.changeActiveButton("fines");
     this.router.navigate(["/fines"]);
@@ -65,16 +70,25 @@ export class AppComponent {
       case "home":
         this.home = true;
         this.addProduct = false;
+        this.rentProducts = false,
         this.fines = false;
         break;
       case "add-product":
         this.home = false;
         this.addProduct = true;
+        this.rentProducts = false,
+        this.fines = false;
+        break;
+      case "rent-products":
+        this.home = false;
+        this.addProduct = false;
+        this.rentProducts = true,
         this.fines = false;
         break;
       case "fines":
         this.home = false;
         this.addProduct = false;
+        this.rentProducts = false,
         this.fines = true;
         break;
       default:

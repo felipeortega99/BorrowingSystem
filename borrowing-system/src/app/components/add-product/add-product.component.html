@@ -1,3 +1,4 @@
+<ngx-spinner bdColor="rgba(0,0,0,0)" size="large" color="#000000" type="ball-beat"></ngx-spinner>
 <div id="grid-body-container" *ngIf="isLogged">
     <h1 class="main-label">Agregar producto</h1>
     <div class="card card-box-shadow" id="add-product-container">
@@ -17,17 +18,10 @@
                     <div *ngIf="f['price'].errors.required">Por favor ingresa el costo</div>
                 </div>
                 <div class="form-group">
-                    <select class="form-control" id="condition" placeholder="Condición" required>
-                      <option >Condición</option>
-                      <option >Nuevo</option>
-                      <option >Usado</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                    <select class="form-control" id="pcategory" placeholder="Categoria" required>
-                    <option >Categoria</option>
-                    <option >Cables</option>
-                    <option >Artículos de oficina</option>
+                    <select class="form-control" formControlName="category" id="category" [ngClass]="{ 'is-invalid': submitted && f.category.errors }">
+                    <option value="">Categoria</option>
+                    <option value="cables">Cables</option>
+                    <option value="oficina">Artículos de oficina</option>
                   </select>
                 </div>
                 <div class="form-group">

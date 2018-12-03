@@ -82,13 +82,13 @@ products: any;
       productsRef.push(this.product).then(ref => {
         this.product.k = ref.key;
         this.afDb.object(`products/${ref.key}`).set(this.product).then(() => {
-          this.errorMessage();
+          this.toastr.success('', 'El producto se agregó con éxito', {
+            timeOut: 5000
+          });
           this.submitted = false;
           this.clearForm();
         }).catch(error => {
-          this.toastr.error('Error inesperado', 'Se ha producido un error, volver a intentarlo', {
-            timeOut: 5000
-          });
+          this.errorMessage();
           console.log(error);
         });
       });

@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
       this.loan.borrower_name = '';
       this.loan.start = this.date.getDate().toString();
       this.loan.end = (this.date.getDate() + this.borrowTime).toString();
-      this.loan.status = 'onTime';
+      this.loan.status = 'loaned';
   
       this.createForm();
         } else {
@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit {
   }
 
   updateProduct(product: ProductModel) {
-    this.af.object(`/products/'${product.k}`)
+    this.af.object(`/products/${product.k}`)
     .update({ available: false, category: product.category, cost: product.cost, k: product.k, name: product.name});
   }
 

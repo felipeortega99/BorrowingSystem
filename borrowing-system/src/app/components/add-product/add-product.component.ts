@@ -1,18 +1,18 @@
-import { NgIf } from '@angular/common/src/directives/ng_if';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
-import { ToastrService } from 'ngx-toastr';
+import { NgIf } from "@angular/common/src/directives/ng_if";
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators, NgForm } from "@angular/forms";
+import { AuthService } from "../../services/auth.service";
+import { ToastrService } from "ngx-toastr";
 
 // Routes
-import { Router } from '@angular/router';
+import { Router } from "@angular/router";
 // Firebase
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
 
 // Models
-import { ProductModel } from '../../models/product.model';
-
+import { ProductModel } from "../../models/product.model";
+import { CategoryModel } from "../../models/category.model";
 
 @Component({
   selector: "app-add-product",
@@ -20,101 +20,190 @@ import { ProductModel } from '../../models/product.model';
   styleUrls: ["./add-product.component.scss"]
 })
 export class AddProductComponent implements OnInit {
-addProductForm: FormGroup;
-submitted = false;
-isLogged = false;
-product = {} as ProductModel;
-products$: AngularFireList<any[]>;
-products: any;
+  addProductForm: FormGroup;
+  addCategoryForm: FormGroup;
+  submittedC = false;
+  submittedP = false;
+  isLogged = false;
+  product = {} as ProductModel;
+  products: any;
+  categories: any;
+  category = {} as CategoryModel;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService,
-    private router: Router, private afAuth: AngularFireAuth,
-    private af: AngularFireDatabase, private afDb: AngularFireDatabase,
-    private toastr: ToastrService) {
-      this.product.name = '';
-      this.product.cost = 0;
-      this.product.available = true;
-      this.product.category = '';
+  constructor(
+    private formBuilderProduct: FormBuilder,
+    private formBuilderCategory: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private afAuth: AngularFireAuth,
+    private af: AngularFireDatabase,
+    private afDb: AngularFireDatabase,
+    private toastr: ToastrService
+  ) {
+    // Authentication
+    this.afAuth.authState.subscribe(auth => {
+      if (auth) {
+        this.isLogged = true;
+        console.log("Got to add-product. We are logged in");
+        // Get products from database
+        this.loadData();
 
-      this.createForm();
+        this.product.name = "";
+        this.product.cost = 0;
+        this.product.available = true;
+        this.product.category = "";
 
-      // Authentication
-      this.afAuth.authState.subscribe(auth => {
-        if (auth) {
-          this.isLogged = true;
-          console.log("Got to add-product. We are logged in");
-        } else {
-          this.isLogged = false;
-          console.log("Got to add-product but wasn't logged in");
-          this.router.navigate(["/login"]);
-        }
-      });
-      // Get products from database
-      afDb.list('/products').valueChanges().subscribe(products => {
+        this.category.name = "";
+
+        this.createForm();
+      } else {
+        this.isLogged = false;
+        console.log("Got to add-product but wasn't logged in");
+        this.router.navigate(["/login"]);
+      }
+    });
+  }
+
+  loadData() {
+    this.afDb
+      .list("/products", ref => ref.orderByChild("category"))
+      .valueChanges()
+      .subscribe(products => {
         this.products = products;
+      });
+    this.afDb
+      .list("/categories", ref => ref.orderByChild("name"))
+      .valueChanges()
+      .subscribe(categories => {
+        this.categories = categories;
       });
   }
 
   ngOnInit() {}
 
   createForm() {
-    this.addProductForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      cost: ['', Validators.required],
-      category: ['', Validators.required]
+    this.addProductForm = this.formBuilderProduct.group({
+      name: ["", Validators.required],
+      cost: ["", Validators.required],
+      category: ["", Validators.required]
+    });
+
+    this.addCategoryForm = this.formBuilderCategory.group({
+      name: ["", Validators.required]
     });
   }
 
   // Reference of addProductForm.controls
-  get f() { return this.addProductForm.controls; }
+  get pf() {
+    return this.addProductForm.controls;
+  }
 
-  onSubmit() {
-      this.submitted = true;
-      if (this.addProductForm.invalid) {
-        return;
-      }
+  // Reference of addCategoryForm.controls
+  get cf() {
+    return this.addCategoryForm.controls;
+  }
 
-      this.product.name = this.f['name'].value;
-      this.product.cost = this.f['cost'].value;
-      this.product.category = this.f['category'].value;
+  onSubmitProduct() {
+    this.submittedP = true;
+    if (this.addProductForm.invalid) {
+      return;
+    }
 
-      const productsRef = this.af.list('/products');
-      productsRef.push(this.product).then(ref => {
-        this.product.k = ref.key;
-        this.afDb.object(`products/${ref.key}`).set(this.product).then(() => {
+    this.product.name = this.pf["name"].value;
+    this.product.cost = this.pf["cost"].value;
+    this.product.category = this.pf["category"].value;
+
+    const productsRef = this.af.list("/products");
+    productsRef.push(this.product).then(ref => {
+      this.product.k = ref.key;
+      this.afDb
+        .object(`products/${ref.key}`)
+        .set(this.product)
+        .then(() => {
+          this.successMessage("El producto se agregó con éxito");
+          this.submittedP = false;
+          this.clearProductForm();
+        })
+        .catch(error => {
           this.errorMessage();
-          this.submitted = false;
-          this.clearForm();
-        }).catch(error => {
-          this.toastr.error('Error inesperado', 'Se ha producido un error, volver a intentarlo', {
-            timeOut: 5000
-          });
           console.log(error);
         });
-      });
+    });
+  }
+  onSubmitCategory() {
+    this.submittedC = true;
+    if (this.addCategoryForm.invalid) {
+      return;
+    }
+
+    this.category.name = this.cf["name"].value;
+
+    const categoriesRef = this.af.list("/categories");
+    categoriesRef.push(this.category).then(ref => {
+      this.afDb
+        .object(`categories/${ref.key}`)
+        .set(this.category)
+        .then(() => {
+          // this.successMessage("La categoría se agregó con éxito");
+          this.toastr.success(
+            "Categoría añadida",
+            "La categoría se agregó con éxito",
+            {
+              timeOut: 5000
+            }
+          );
+          this.submittedC = false;
+          this.clearCategoryForm();
+        })
+        .catch(error => {
+          this.errorMessage();
+          console.log(error);
+        });
+    });
   }
 
   onDeleteProduct(id: any) {
     const product = this.afDb.object(`/products/${id}`);
-    product.remove().then(() => {
-      console.log('Eliminado con éxito');
-      this.toastr.success('', 'Producto eliminado con éxito', {
-        timeOut: 5000
+    product
+      .remove()
+      .then(() => {
+        console.log("Eliminado con éxito");
+        this.toastr.success("", "Producto eliminado con éxito", {
+          timeOut: 5000
+        });
+      })
+      .catch(error => {
+        this.errorMessage();
+        console.log(error);
       });
-  }).catch(error => {
-    this.errorMessage();
-      console.log(error);
-  });
   }
 
-  clearForm() {
+  clearProductForm() {
     this.addProductForm.reset();
-    this.f['category'].setValue('');
+    this.pf["category"].setValue("");
+  }
+
+  clearCategoryForm() {
+    this.addCategoryForm.reset();
   }
 
   errorMessage() {
-    this.toastr.error('Error inesperado', 'Se ha producido un error, volver a intentarlo', {
-      timeOut: 5000
-    });
+    this.toastr.error(
+      "Error inesperado",
+      "Se ha producido un error, volver a intentarlo",
+      {
+        timeOut: 5000
+      }
+    );
+  }
+
+  successMessage(message: string) {
+    this.toastr.success(
+      "",
+      message,
+      {
+        timeOut: 5000
+      }
+    );
   }
 }

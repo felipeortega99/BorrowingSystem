@@ -7,14 +7,14 @@
             <a (click)="goToHome()" class="sidebar-item">
                 <h3 [ngClass]="{ active: home }">Inicio</h3>
             </a>
-            <a (click)="goToAddProduct()" class="sidebar-item">
-                <h3 [ngClass]="{ active: addProduct }">Agregar producto</h3>
-            </a>
             <a (click)="goToRentProducts()" class="sidebar-item">
                 <h3 [ngClass]="{ active: rentProducts }">Productos en renta</h3>
             </a>
             <a (click)="goToFines()" class="sidebar-item">
                 <h3 [ngClass]="{ active: fines }">Multas</h3>
+            </a>
+            <a (click)="goToAddProduct()" class="sidebar-item">
+                <h3 [ngClass]="{ active: addProduct }">Agregar producto</h3>
             </a>
             <a id="logout" (click)="logout()" class="sidebar-item">
                 <h3>Cerrar sesión</h3>

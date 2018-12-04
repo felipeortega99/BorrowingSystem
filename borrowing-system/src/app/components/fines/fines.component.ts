@@ -11,14 +11,7 @@ import { Observable } from "rxjs";
   styleUrls: ["./fines.component.scss"]
 })
 export class FinesComponent implements OnInit {
-  isLogged: boolean = false;
-  // fines = [{
-  //   borrower: 'Juan',
-  //   cost: '$500.00',
-  //   product: 'Cable HDMI',
-  //   type: 'Retraso'
-  // }];
-  // fines: Observable<any[]>;
+  isLogged = false;
   fines: any;
 
   constructor(
@@ -32,7 +25,7 @@ export class FinesComponent implements OnInit {
         this.isLogged = true;
         console.log("Got to fines. We are logged in");
         afDb
-          .list("/fines")
+          .list("/fines", ref => ref.orderByChild("borrower_id"))
           .valueChanges()
           .subscribe(fines => {
             this.fines = fines;

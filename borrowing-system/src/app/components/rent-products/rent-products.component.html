@@ -13,14 +13,14 @@
                     </tr>
                 </thead>
                 <tbody class="font-weight-light">
-                    <tr>
-                        <td scope="row">Cable HDMI</td>
-                        <td>Mariana Cázares</td>
-                        <td>9459</td>
+                    <tr *ngFor="let loan of loans">
+                        <td scope="row">{{loan.item.name}}</td>
+                        <td>{{loan.borrower_name}}</td>
+                        <td>{{loan.borrower_id}}</td>
                         <td class="flex-buttons-container">
-                            <button type="button" class="btn btn-success btn-sm">Entregado</button>
-                            <button type="button" class="btn btn-warning btn-sm">Tarde</button>
-                            <button type="button" class="btn btn-danger btn-sm">No entregado</button>
+                            <button type="button" class="btn btn-success btn-sm" (click)="onDelivered(loan.k)">Entregado</button>
+                            <button type="button" class="btn btn-warning btn-sm" (click)="onLate(loan.k)">Tarde</button>
+                            <button type="button" class="btn btn-danger btn-sm" (click)="onNotDelivered(loan.k)">No entregado</button>
                         </td>
                     </tr>
                 </tbody>
